@@ -5,7 +5,7 @@ class Contato {
 	private $pdo;
 
 	public function __construct() {
-		$this->pdo = new PDO("mysql:dbname=crudoo;host=localhost", "root", "");
+		$this->pdo = new PDO("mysql:dbname=crudoo;host=192.168.1.152", "root", "root");
 	}
 
 	public function adicionar($email, $nome = '') {

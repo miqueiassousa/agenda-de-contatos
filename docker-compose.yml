@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: php
+    image: php_apache_mysql_mik
+    ports:
+      - "8080:80"
+    volumes:
+      - ./meu-site:/var/www/html
+    networks:
+      - mynet
+    depends_on:
+      - mysql
+  mysql:
+      container_name: sql
+      image: mysql:5.7
+      volumes:
+          - ./sql:/var/lib/mysql
+      # restart: always
+      ports:
+          - '3306:3306'
+      environment:
+        MYSQL_ROOT_PASSWORD: root 
+      networks:
+      - mynet 
+networks:
+  mynet:
+    driver: bridge

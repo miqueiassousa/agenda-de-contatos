@@ -7,6 +7,7 @@
 	<title>Agenda de Contatos CRUD</title>
 
 	<link rel="stylesheet" href="assets\bootstrap\css\bootstrap.min">
+	<link rel="stylesheet" href="assets\css\style.css">
 
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/navbar-animation-fix.js"></script>
