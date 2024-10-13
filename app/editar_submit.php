@@ -1,6 +1,8 @@
 <?php
-include 'contato.class.php';
+include 'Contato.class.php';
 $contato = new Contato();
+
+
 
 if(!empty($_POST['id'])) {
 	$nome = $_POST['nome'];
@@ -10,6 +12,5 @@ if(!empty($_POST['id'])) {
 	if(!empty($email)) {
 		$contato->editar($nome, $email, $id);
 	}
-
-	header("Location: index.php");
+	// header("Location: index.php");
 }

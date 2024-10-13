@@ -1,5 +1,5 @@
 <?php
-include 'contato.class.php';
+include 'Contato.class.php';
 $contato = new Contato();
 
 if(!empty($_GET['id'])) {
