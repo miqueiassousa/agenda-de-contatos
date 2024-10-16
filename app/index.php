@@ -22,7 +22,7 @@
 include 'Contato.class.php';
 
 $contato = new Contato();
-var_dump($_POST);
+
 ?>
 
 <div class="container">

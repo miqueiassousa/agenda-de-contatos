@@ -12,5 +12,5 @@ if(!empty($_POST['id'])) {
 	if(!empty($email)) {
 		$contato->editar($nome, $email, $id);
 	}
-	// header("Location: index.php");
+	header("Location: index.php");
 }
