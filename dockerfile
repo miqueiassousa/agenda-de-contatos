@@ -1,17 +1,26 @@
-#FROM php:7.4-fpm
+# Usando a imagem base do PHP com Apache
 FROM php:7.4.9-apache
 
-# Copie seus arquivos PHP para o diretório do servidor web
-COPY ./meu-site /var/www/html
+# Copiar os arquivos PHP para o diretório do servidor web
+COPY ./app /var/www/html
 
-# Instalação das extensões necessárias (por exemplo, pdo_mysql)
+# Instalar as extensões PDO e PDO_MySQL
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Atualize os pacotes e instale o Nano
+# Atualizar pacotes e instalar o Nano
 RUN apt-get update && apt-get install -y nano
 
-# Descomente a linha extension=php_pdo
-RUN sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/' /usr/local/etc/php/php.ini-production
+# Instalar as dependências para a extensão GD
+RUN apt-get update && \
+    apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd
 
-# Exponha a porta 80 (a mesma que você mapeou no docker-compose.yml)
+# Copiar php.ini-development para o php.ini padrão (sem criar link simbólico)
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+
+# Ativar a extensão pdo_mysql no php.ini
+RUN sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/' /usr/local/etc/php/php.ini
+
+# Expor a porta 80 para acesso ao Apache
 EXPOSE 80

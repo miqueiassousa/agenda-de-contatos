@@ -2,6 +2,8 @@
 include 'contato.class.php';
 $contato = new Contato();
 
+var_dump($nome, $email);
+
 if(!empty($_POST['id'])) {
 	$nome = $_POST['nome'];
 	$email = $_POST['email'];

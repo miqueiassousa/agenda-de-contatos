@@ -22,6 +22,7 @@
 include 'Contato.class.php';
 
 $contato = new Contato();
+
 ?>
 
 <div class="container">

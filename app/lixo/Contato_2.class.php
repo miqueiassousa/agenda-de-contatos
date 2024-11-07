@@ -5,17 +5,20 @@ class Contato {
 	private $pdo;
 
 	public function __construct() {
+<<<<<<<< HEAD:app/testeContato_2.class.php
 		// $this->pdo = new PDO("mysql:dbname=crudoo;host=192.168.1.152", "root", "root");
 		$this->pdo = new PDO("mysql:dbname=crudoo;host=localhost", "root", "");
+========
+		$this->pdo = new PDO("mysql:dbname=crudoo;host=mysql", "root", "root");
+>>>>>>>> 4a625ccc505e417a3bcc9d2ee2caf28b3d416bf7:app/lixo/Contato_2.class.php
 	}
 
-	public function adicionar( $nome = '', $email, $celular) {
+	public function adicionar($email, $nome = '') {
 		if($this->existeEmail($email) == false) {
-			$sql = "INSERT INTO contatos (nome, email, celular) VALUES (:nome, :email, :celular)";
+			$sql = "INSERT INTO contatos (nome, email) VALUES (:nome, :email)";
 			$sql = $this->pdo->prepare($sql);
 			$sql->bindValue(':nome', $nome);
 			$sql->bindValue(':email', $email);
-			$sql->bindValue(':celular', $celular);
 			$sql->execute();
 
 			return true;
@@ -23,34 +26,6 @@ class Contato {
 			return false;
 		}
 	}
-
-	// public function adicionar($email, $celular, $nome = '') {
-	// 	if ($this->existeEmail($email) == false) {
-	// 		try {
-	// 			$sql = "INSERT INTO contatos (nome, email, celular) VALUES (:nome, :email, :celular)";
-	// 			$stmt = $this->pdo->prepare($sql);
-	// 			$stmt->bindValue(':nome', $nome);
-	// 			$stmt->bindValue(':email', $email);
-	// 			$stmt->bindValue(':celular', $celular);
-				
-	// 			// Executa a consulta
-	// 			if ($stmt->execute()) {
-	// 				return true;
-	// 			} else {
-	// 				// Se a execução falhar, exibe os erros da consulta
-	// 				$errorInfo = $stmt->errorInfo();
-	// 				echo "Erro na execução: " . $errorInfo[2];
-	// 				return false;
-	// 			}
-	// 		} catch (PDOException $e) {
-	// 			echo "Erro ao adicionar contato: " . $e->getMessage();
-	// 			return false;
-	// 		}
-	// 	} else {
-	// 		return false;  // O email já existe
-	// 	}
-	// }
-	
 
 	public function getInfo($id) {
 		$sql = "SELECT * FROM contatos WHERE id = :id";
@@ -78,18 +53,12 @@ class Contato {
 	}
 
 	public function editar($nome, $email, $id) {
-		if($this->existeEmail($email) == false) {
-			$sql = "UPDATE contatos SET nome = :nome, email = :email WHERE id = :id";
-			$sql = $this->pdo->prepare($sql);
-			$sql->bindValue(':nome', $nome);
-			$sql->bindValue(':email', $email);
-			$sql->bindValue(':id', $id);
-			$sql->execute();
-
-			return true;
-		} else {
-			return false;
-		}
+		$sql = "UPDATE contatos SET nome = :nome, email = :email WHERE id = :id";
+		$sql = $this->pdo->prepare($sql);
+		$sql->bindValue(':nome', $nome);
+		$sql->bindValue(':email', $email);
+		$sql->bindValue(':id', $id);
+		$sql->execute();
 	}
 
 	public function excluirPeloId($id) {

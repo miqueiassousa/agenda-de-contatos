@@ -1,5 +1,5 @@
 <?php
-include 'contato.class.php';
+include 'Contato.class.php';
 $contato = new Contato();
 
 if(!empty($_GET['id'])) {
@@ -26,7 +26,7 @@ if(!empty($_GET['id'])) {
 	<input type="text" name="nome" value="<?php echo $info['nome'];?>" /><br/> <br/>
 
 	E-mail:<br/>
-	<input type="text" name="nome" value="<?php echo $info['email'];?>" /><br/> <br/>
+	<input type="email" name="email" value="<?php echo $info['email'];?>" /><br/> <br/>
 
 	<input type="submit" value="Salvar">
 	
