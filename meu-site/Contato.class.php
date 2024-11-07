@@ -5,15 +5,17 @@ class Contato {
 	private $pdo;
 
 	public function __construct() {
-		$this->pdo = new PDO("mysql:dbname=crudoo;host=192.168.1.152", "root", "root");
+		// $this->pdo = new PDO("mysql:dbname=crudoo;host=192.168.1.152", "root", "root");
+		$this->pdo = new PDO("mysql:dbname=crudoo;host=localhost", "root", "");
 	}
 
-	public function adicionar($email, $nome = '') {
+	public function adicionar( $nome = '', $email, $celular) {
 		if($this->existeEmail($email) == false) {
-			$sql = "INSERT INTO contatos (nome, email) VALUES (:nome, :email)";
+			$sql = "INSERT INTO contatos (nome, email, celular) VALUES (:nome, :email, :celular)";
 			$sql = $this->pdo->prepare($sql);
 			$sql->bindValue(':nome', $nome);
 			$sql->bindValue(':email', $email);
+			$sql->bindValue(':celular', $celular);
 			$sql->execute();
 
 			return true;
@@ -21,6 +23,34 @@ class Contato {
 			return false;
 		}
 	}
+
+	// public function adicionar($email, $celular, $nome = '') {
+	// 	if ($this->existeEmail($email) == false) {
+	// 		try {
+	// 			$sql = "INSERT INTO contatos (nome, email, celular) VALUES (:nome, :email, :celular)";
+	// 			$stmt = $this->pdo->prepare($sql);
+	// 			$stmt->bindValue(':nome', $nome);
+	// 			$stmt->bindValue(':email', $email);
+	// 			$stmt->bindValue(':celular', $celular);
+				
+	// 			// Executa a consulta
+	// 			if ($stmt->execute()) {
+	// 				return true;
+	// 			} else {
+	// 				// Se a execução falhar, exibe os erros da consulta
+	// 				$errorInfo = $stmt->errorInfo();
+	// 				echo "Erro na execução: " . $errorInfo[2];
+	// 				return false;
+	// 			}
+	// 		} catch (PDOException $e) {
+	// 			echo "Erro ao adicionar contato: " . $e->getMessage();
+	// 			return false;
+	// 		}
+	// 	} else {
+	// 		return false;  // O email já existe
+	// 	}
+	// }
+	
 
 	public function getInfo($id) {
 		$sql = "SELECT * FROM contatos WHERE id = :id";

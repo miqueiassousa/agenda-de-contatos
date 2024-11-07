@@ -27,6 +27,9 @@
 				E-mail:<br />
 				<input class="form-control" type="email" name="email" /><br /><br />
 
+				Celular:<br />
+				<input class="form-control" type="number" name="celular" /><br /><br />
+
 				<input class="btn btn-primary" type="submit" value="Adicionar">
 			</div>
 
